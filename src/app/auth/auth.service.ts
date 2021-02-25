@@ -22,7 +22,7 @@ export class AuthService {
 
     signUp(email: string, password: string) {
         return this.http.post<AuthResponseData>(
-            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
+            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAY3p_U3GVJzwT2F_jSitD7Z2Q4QX0ILd8',
             {
                 email: email,
                 password: password,
@@ -36,7 +36,7 @@ export class AuthService {
 
     login(email: string, password: string) {
         return this.http.post<AuthResponseData>(
-            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
+            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAY3p_U3GVJzwT2F_jSitD7Z2Q4QX0ILd8',
             {
                 email: email,
                 password: password,
@@ -61,6 +61,30 @@ export class AuthService {
         );
         
         this.user.next(user); // emit as the currently logged in user
+        localStorage.setItem('userData', JSON.stringify(user));
+    }
+
+    autoLogin() {
+        const userData: { 
+
+            email: string;
+            id: string;
+            _token: string;
+            _tokenExpirationDate: string;
+
+        } = JSON.parse(localStorage.getItem('userData')!);
+        if (!userData) return;
+        
+        const loadedUser = new User(
+            userData.email,
+            userData.id,
+            userData._token,
+            new Date(userData._tokenExpirationDate)
+        )
+
+        if (loadedUser.token) {
+            this.user.next(loadedUser);
+        }
     }
 
     handleError(errorRes: HttpErrorResponse) {
