@@ -20,11 +20,11 @@
                     <a routerLink="/auth">Sign Up/Login</a>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right" *ngIf="isAuthenticated">
+            <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a style="cursor: pointer;">Logout</a>
+                    <a style="cursor: pointer;" *ngIf="isAuthenticated">Logout</a>
                 </li>
-                <li class="dropdown" appDropdown>
+                <li class="dropdown" appDropdown *ngIf="isAuthenticated">
                     <a style="cursor: pointer;" class="dropdown-toggle" role="button">
                         Manage <span class="caret"></span></a>
                     <ul class="dropdown-menu">
