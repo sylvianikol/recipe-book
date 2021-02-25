@@ -12,8 +12,11 @@
                 </label>
             </div> 
             <div class="btn-toolbar">
-                <button class="btn btn-primary">Sign Up</button>
-                <button class="btn btn-primary">Login</button>
+                <button class="btn btn-primary" 
+                        type="submit">{{ isLoginMode ? 'Login' : 'Sign Up' }}</button>
+                <button class="btn btn-primary" 
+                        (click)="onSwitchMode()"
+                        type="button">Switch to {{ isLoginMode ? 'Sign Up' : 'Login' }}</button>
             </div>
         </form>
     </div>
