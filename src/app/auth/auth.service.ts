@@ -25,6 +25,7 @@ export class AuthService {
                 password: password,
                 returnSecureToken: true
             }
+
         ).pipe(catchError(errorRes => {
             let errorMessage = 'An unknown error occurred!';
 
@@ -39,7 +40,6 @@ export class AuthService {
                 case 'OPERATION_NOT_ALLOWED':
                     errorMessage = 'Operation is not allowed!';
                     break;
-
             }
 
             return throwError(errorMessage);
